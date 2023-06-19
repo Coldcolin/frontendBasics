@@ -1,0 +1,139 @@
+* {
+    padding: 0%;
+    margin: 0%;
+    box-sizing: border-box;
+}
+
+.Container {
+    width: 100%;
+    height: max-content;
+}
+
+.Wrapper {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.UserInfo {
+    width: 100%;
+    height: 50vh;
+    border-bottom: 1px solid gray;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.UserinfoText {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+.UserinfoText input {
+    height: 40px;
+    margin-bottom: 20px;
+    padding-left: 10px;
+}
+.UserinfoText textarea {
+    margin-bottom: 20px;
+    padding-left: 10px;
+}
+.UserinfoText textarea {
+    margin-bottom: 20px;
+    padding-left: 10px;
+}
+
+.UserinfoText button {
+    height: 40px;
+    width: 70%;
+    margin: auto;
+    background: blue;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.UserOutput {
+    width: 100%;
+    height: auto;
+    display: flex;
+    padding: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.OutPutCard {
+    width: 25%;
+    height: 350PX;
+    background: #000;
+    margin: 5px 5px;
+    color: white;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.OutPutCard:has( input[type="checkbox"]:checked){
+    background: red
+}
+
+.CardHeader {
+    width: 100%;
+    height: 25%;
+    border-bottom: 1px solid gray;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin-bottom: 10%;
+}
+
+.CardHeader h6{
+    margin: 10px 10px;
+    font-size: 15px;
+    font-family:sans-serif;
+    color: lightgrey;
+}
+
+.CardHeader span{
+    margin: 10px 10px;
+    font-size: 16px;
+    font-family:sans-serif;
+    color: red;
+    cursor: pointer;
+    transform: scale(1);
+    transition: all 350ms;
+}
+
+.CardHeader span:hover{
+    transform: scale(1.2);
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.Profile {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: white;
+    border-radius: 50%;
+    top: 70%; 
+    right: 45%;
+    color: black;
+    font-size: 20px;
+    /* left: 50%; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.CardText {
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    gap: 15px;
+    padding: 10px;
+    font-size: 15px;
+    font-family:sans-serif;
+    color: lightgrey;
+    line-height: 20.7px;
+}
