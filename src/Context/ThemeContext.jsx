@@ -58,11 +58,16 @@ const reducer =(state, action)=>{
 
 
 const Theme =({children})=>{
+    const[watch, setWatch]= useState(JSON.parse(localStorage.getItem("ecommerceUser")))
     const [theme, setTheme] = useState('light');
-    const [total, setTotal] = useState(0);
-    
+    const [totals, setTotal] = useState(0);
+    const [showMenu, setShowMenu]= useState(false);
+    console.log("ThemeContext", watch)
     const [state, dispatch ]= useReducer(reducer, initialCart);
     
+    const toggleMenu=()=>{
+      setShowMenu(!showMenu)
+    }
     
     const darkMode=()=>{
         setTheme('dark')
@@ -81,8 +86,12 @@ const Theme =({children})=>{
       localStorage.setItem("cart", JSON.stringify(state))
     },[state])
 
+    // useEffect(()=>{
+    //   setisLoggedIn(JSON.parse(localStorage.getItem("ecommerceUser")))
+    // })
+
     return(
-        <ThemeContext.Provider value={{theme, darkMode, lightMode, state, dispatch, total}}>
+        <ThemeContext.Provider value={{theme, darkMode, lightMode, state, dispatch, totals, showMenu, toggleMenu, watch, setWatch}}>
             {children}
         </ThemeContext.Provider>
     )

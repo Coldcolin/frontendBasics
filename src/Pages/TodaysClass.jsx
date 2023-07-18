@@ -4,10 +4,16 @@ import {ThemeContext} from "../Context/ThemeContext"
 
 import './TodaysClass.css'
 import {Link} from "react-router-dom"
+import axios from "axios"
+
+import { useDispatch } from 'react-redux';
+import {addToCart, total} from "../Redux/feautures.js"
+
 
 
 const TodaysClass = () => {
-    const {theme, state, dispatch} = useContext(ThemeContext)
+    const dispatch = useDispatch();
+    const {theme, state} = useContext(ThemeContext)
     
 // let inputRef = useRef()
 // let textAreaRef = useRef()
@@ -15,14 +21,13 @@ const TodaysClass = () => {
 
 const [data, setData] = useState([]);
 function handleAddTask(id, name, price,image) {
-    dispatch({
-        type: 'added',
+    dispatch(addToCart({
         id: id,
         name: name,
         price: price,
         image: image
-    });
-    
+}));
+    dispatch(total())
     alert("Item added to cart")
   } 
 
@@ -66,25 +71,20 @@ const deleteItem=(id)=>{
 }
 
 useEffect(()=>{
-    fetch('https://fakestoreapi.com/products')
-            .then(kennedy=>kennedy.json())
-            .then(martin=>setData(martin))
+    const getApi=async()=>{
+        try {
+            const response = await axios.get('https://fakestoreapi.com/products');
+            setData(response.data);
+          } catch (error) {
+            console.error(error);
+          }
+    }
+    getApi()
+    // fetch('https://fakestoreapi.com/products')
+    //         .then(kennedy=>kennedy.json())
+    //         .then(martin=>setData(martin))
 },[])
-// useEffect(()=>{
-//     console.log("component updated")
-// })
-// useEffect(()=>{
-//     console.log("userName updated")
-// }, [userName])
-// useEffect(()=>{
-//     console.log(data)
-// }, [data])
-// useEffect(()=>{
-//     console.log("check updated", check)
-// }, [check])
-// useEffect(()=>{
-//     console.log("something happen")
-// }, [data,userName])
+
 
 
   return (
@@ -97,6 +97,7 @@ useEffect(()=>{
                     <button className='Btn' onClick={AddText} >{userName === ""? "Delete All": "Add Memory"}</button>
                 </div>
             </div> */}
+                
             
             <div className='UserOutput'>
                    {/* {

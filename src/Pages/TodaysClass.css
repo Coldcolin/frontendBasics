@@ -14,6 +14,8 @@
     height: auto;
     display: flex;
     flex-direction: column;
+    padding-top: 50px;
+    position: relative;
 }
 
 .UserInfo {
@@ -137,3 +139,10 @@
     color: lightgrey;
     line-height: 20.7px;
 }
+
+@media screen and (width <= 768px) {
+    .OutPutCard {
+        width: 50%;
+        height: auto;
+    }
+  }
