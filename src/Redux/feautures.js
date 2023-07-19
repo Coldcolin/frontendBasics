@@ -4,7 +4,7 @@ const initialState = {
     products: [],
     cart: [],
     total: 0,
-    user:{id:"", token:"", name: ""}
+    user:{id:"", token:"", name: "", email: ""}
 }
 
 const features = createSlice({
@@ -64,7 +64,7 @@ const features = createSlice({
             state.user = payload
         },
         logOutHelper: (state)=>{
-            state.user ={id:"", token:"", name: ""}
+            state.user ={id:"", token:"", name: "", email: ""}
         }
     },
 });

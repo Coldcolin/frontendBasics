@@ -56,7 +56,7 @@ const LoginForm = () => {
             const user = res.data.data
             localStorage.setItem("ecommerceUser", JSON.stringify({id:user._id, token: user.token, name: user.name}))
             // console.log({name: username, email: email, password: password})
-            dispatch(loginHelper({id:user._id, token: user.token, name: user.name}))
+            dispatch(loginHelper({id:user._id, token: user.token, name: user.name, email: user.email}))
             setLoad(false)
             navigate("/")
         }catch(err){

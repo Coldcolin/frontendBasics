@@ -9,7 +9,9 @@ import { removeItem, addToCart, minusItem, total } from "../Redux/feautures.js";
 const Cart = () => {
     const dispatch = useDispatch();
     const cart = useSelector((state) => state.commerce.cart);
-    const {theme, state, totals} = useContext(ThemeContext);
+    const totals = useSelector((state) => state.commerce.total);
+    const user = useSelector((state) => state.commerce.user);
+    const {theme, state} = useContext(ThemeContext);
     const [increase, setIncrease] = useState(0)
     const [decrease, setDecrease] = useState(0)
     const [change, setChange] = useState(false)
@@ -40,16 +42,31 @@ const Cart = () => {
     const removeItems=(id)=>{
       dispatch(removeItem({id: id}))
     }
+    const payment =()=>{
+      const refVal = "colin"+ Math.random() * 1000;
+      window.Korapay.initialize({
+        key: "pk_test_AeraXcqwfDvr9UaQ7CVLPHujcrqWyKWUY4MRK7Fi",
+        reference: `${refVal}`,
+        amount: totals, 
+        currency: "NGN",
+        customer: {
+          name: user.name,
+          email: user.email
+        },
+        notification_url: "https://example.com/webhook"
+      });
+    }
 
   return (
     <div className='CartContainer' style={{backgroundColor: theme === 'light'? "white": "black"}}>
         {cart.length !== 0 && <h3>Total: {totals}</h3>}
         <div className='Wrapper'>
             {
-              cart.length === 0? <h1>No Items in Cart</h1>:<div className='UserOutput'>
+              cart.length === 0? <h1>No Items in Cart</h1>:<div className="UserOutputs">
+                <div className='UserOutput'>
                 {
                   cart.map((props)=>(
-                     <div  key={props.id} className='OutPutCard' style={{backgroundColor: theme === 'light'? "black": "white", color: theme === 'light'? "black": "white" }} >
+                     <div  key={props.id} className='OutPutCard' style={{backgroundColor: theme === 'light'? "black": "white", color: theme === 'light'? "black": "white" ,padding:"10px"}} >
                      <Link to={`/detail/${props.id}`}>
                      <div className='CardHeader'>
                          <h6>{props.name}</h6>
@@ -66,12 +83,17 @@ const Cart = () => {
                         <h3>{props.QTY}</h3>
                         <button style={{cursor:"pointer", fontSize: "20px", padding: "5px", display: "flex", justifyContent: "center", alignItems: "center"}} onClick={()=>{Decrease(props.id, props.QTY)}}>-</button>
                      </div>
-                     <div style={{color: "red", fontSize: "20px", background: "white", width:"60px", cursor: "pointer"}} onClick={()=> removeItems(props.id)}>remove Item</div>
+                     <div style={{color: "red", padding:"5px", background: "white", width:"100px", cursor: "pointer"}} onClick={()=> removeItems(props.id)}><p style={{width:"100%", fontSize:"16px"}}>remove Item</p></div>
                  </div>
                  ))
                 }
+               
              </div>
+             <button style={{width:"30%"}} onClick={payment}>Check out</button>
+              </div>
+             
             }
+
         </div>
     </div>
   )
